@@ -1,0 +1,22 @@
+.ingredients {
+  height: calc(100vh - 536px);
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}

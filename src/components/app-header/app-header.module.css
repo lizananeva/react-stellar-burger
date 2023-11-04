@@ -1,0 +1,31 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-areas: "navigation logo profile";
+  padding-left: calc((100vw - 1280px) / 2);
+  padding-right: calc((100vw - 1280px) / 2);
+  background-color: var(--background);
+  box-shadow:
+    0px 0px 1px 0px rgba(0, 0, 0, .04),
+    0px 4px 8px 0px rgba(0, 0, 0, .04),
+    0px 16px 24px 0px rgba(0, 0, 0, .04),
+    0px 24px 32px 0px rgba(0, 0, 0, .04);
+}
+
+.navigation {
+  grid-area: navigation;
+  display: flex;
+  gap: 8px;
+}
+
+.logo {
+  grid-area: logo;
+  align-self: center;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.profile {
+  grid-area: profile;
+  justify-self: right;
+}

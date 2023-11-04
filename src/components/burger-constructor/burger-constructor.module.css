@@ -1,0 +1,16 @@
+.constructor {
+  flex: 1;
+}
+
+.order {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 40px;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
