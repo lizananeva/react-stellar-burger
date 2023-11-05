@@ -1,7 +1,8 @@
 import styles from './card.module.css';
 import React from 'react';
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
+import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientPropType } from '../../utils/prop-types';
 
 const Card = ({ data, openDetails }) => {
   const { image, name, price } = data;
@@ -22,13 +23,7 @@ const Card = ({ data, openDetails }) => {
 }
 
 Card.propTypes = {
-  data: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  }).isRequired,
+  data: ingredientPropType.isRequired,
   openDetails: PropTypes.func.isRequired
 }
 

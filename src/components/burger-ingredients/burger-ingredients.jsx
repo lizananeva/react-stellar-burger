@@ -1,8 +1,9 @@
 import styles from './burger-ingredients.module.css';
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import TabsPanel from '../tabs-panel/tabs-panel';
 import CardsGroup from '../cards-group/cards-group';
-import PropTypes from 'prop-types';
+import { ingredientPropType } from '../../utils/prop-types';
 
 const BurgerIngredients = ({ data, openDetails }) => {
   const bunCards = useMemo(() => data.filter(el => el.type === 'bun'), [data]);
@@ -23,13 +24,7 @@ const BurgerIngredients = ({ data, openDetails }) => {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  })).isRequired,
+  data: PropTypes.arrayOf(ingredientPropType).isRequired,
   openDetails: PropTypes.func.isRequired
 }
 

@@ -1,8 +1,9 @@
 import styles from './ingredients-list.module.css';
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import Ingredient from '../ingredient/ingredient';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
+import { ingredientPropType } from '../../utils/prop-types';
 
 const IngredientsList = ({ ingredients }) => {
   const bun = useMemo(() => ingredients.find(el => el.type === 'bun'), [ingredients]);
@@ -20,7 +21,7 @@ const IngredientsList = ({ ingredients }) => {
       />
     </div>
     <ul className={`${styles.ingredients} pr-4 pl-4`}>
-      {fillings.map((filling, index) => <Ingredient data={filling} key={index}/>)}
+      {fillings.map(filling => <Ingredient data={filling} key={filling._id}/>)}
     </ul>
     <div className='pl-8 mt-4'>
       <ConstructorElement
@@ -36,13 +37,7 @@ const IngredientsList = ({ ingredients }) => {
 }
 
 IngredientsList.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  })).isRequired
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired
 }
 
 export default IngredientsList;

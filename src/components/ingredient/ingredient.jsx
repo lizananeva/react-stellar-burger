@@ -1,7 +1,8 @@
 import styles from './ingredient.module.css';
 import React from 'react';
-import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
+import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientPropType } from '../../utils/prop-types';
 
 const Ingredient = ({ data }) => {
   const { name, price, image } = data;
@@ -20,13 +21,7 @@ const Ingredient = ({ data }) => {
 }
 
 Ingredient.propTypes = {
-  data: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  }).isRequired
+  data: ingredientPropType.isRequired
 }
 
 export default Ingredient;

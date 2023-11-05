@@ -15,11 +15,17 @@ const App = () => {
 
   useEffect(() => getIngredientsData(), []);
 
-  const getIngredientsData = async () => {
+  const getIngredientsData = () => {
     return fetch(url)
-      .then(res => res.ok ? res.json() : setState({ success: false, ...state }))
+      .then(res => {
+        if ( res.ok) {
+          return res.json();
+        }
+        setState({ success: false, ...state });
+        return Promise.reject(`Ошибка ${res.status}`);
+      })
       .then(res => setState({ success: res.success, apiData: res.data }))
-      .catch(error => console.log(error))
+      .catch(console.error)
   }
 
   const openIngredientDetails = data => {
