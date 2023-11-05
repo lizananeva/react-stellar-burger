@@ -1,0 +1,20 @@
+.ingredients {
+  flex: 1;
+}
+
+.container {
+  height: calc(100vh - 324px);
+  overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
