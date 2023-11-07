@@ -1,5 +1,5 @@
 const config = {
-  BASE_URL: 'https://norma.nomoreparties.space/api',
+  baseUrl: 'https://norma.nomoreparties.space/api',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -12,18 +12,14 @@ export const checkResponse = response => {
   return Promise.reject(`Ошибка ${response.status}`);
 }
 
-export const getIngredientsData = () => {
-  return fetch(`${config.BASE_URL}/ingredients`)
-    .then(response => checkResponse(response))
-    .catch(console.error)
-}
+const request = (endpoint, options) =>
+  fetch(`${config.baseUrl}${endpoint}`, options).then(checkResponse);
 
-export const postOrder = async (ingredients, thunkAPI) => {
-  return fetch(`${config.BASE_URL}/orders`, {
+export const getIngredientsData = () => request('/ingredients');
+
+export const postOrder = ingredients =>
+  request('/orders', {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify(ingredients)
-  })
-  .then(response => checkResponse(response))
-  .catch(console.error)
-}
+  });

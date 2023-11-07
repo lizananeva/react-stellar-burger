@@ -15,20 +15,20 @@ const App = () => {
   const dispatch = useDispatch();
 
   return (
-    <>
-    <AppHeader />
-    <AppMain />
-    {isIngredientModalOpen && (
-      <Modal title={'Детали ингредиента'} onCloseModal={() => dispatch(hideDetails())}>
-        <IngredientDetails />
-      </Modal>
-    )}
-    {isOrderModalOpen && (
-      <Modal title={null} onCloseModal={() => dispatch(hideOrder())}>
-        <OrderDetails />
-      </Modal>
-    )}
-    </>
+    <div className={styles.app}>
+      <AppHeader />
+      <AppMain />
+      {isIngredientModalOpen && (
+        <Modal title={'Детали ингредиента'} onCloseModal={() => dispatch(hideDetails())}>
+          <IngredientDetails />
+        </Modal>
+      )}
+      {isOrderModalOpen && (
+        <Modal title={null} onCloseModal={() =>  dispatch(hideOrder())}>
+          <OrderDetails />
+        </Modal>
+      )}
+    </div>
   );
 }
 

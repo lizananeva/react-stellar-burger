@@ -8,7 +8,7 @@ import IngredientsList from '../ingredients-list/ingredients-list';
 import {
   addIngredient,
   eraseIngredients,
-  selectConstructorIngredients,
+  selectConstructorBun,
   selectConstructorTotal,
   selectAllConstructorId
 } from '../../services/constructor-slice';
@@ -16,6 +16,7 @@ import {
 const BurgerConstructor = () => {
   const constructorTotal = useSelector(selectConstructorTotal);
   const orderIds = useSelector(selectAllConstructorId);
+  const hasBun = Object.keys(useSelector(selectConstructorBun)).length;
 
   const dispatch = useDispatch();
 
@@ -30,33 +31,31 @@ const BurgerConstructor = () => {
     })
   });
 
-  const onSubmitOrder = event => {
-    event.preventDefault();
+  const onPostOrder = () => {
     dispatch(postOrderDetails({ingredients: orderIds}));
-    // dispatch(eraseIngredients());
+    dispatch(eraseIngredients());
   }
 
   return (
     <section className={`${styles.constructor} pt-25 pl-4`}>
-      <form action='#'>
-        <div className={isDragging ? styles.dragging : ''} ref={dropRef}>
-          <IngredientsList />
+      <div className={isDragging ? styles.dragging : ''} ref={dropRef}>
+        <IngredientsList />
+      </div>
+      <div className={`${styles.order} pr-4 pl-4 mt-10`}>
+        <div className={styles.total}>
+          <p className='text text_type_digits-medium'>{constructorTotal}</p>
+          <CurrencyIcon type='primary' />
         </div>
-        <div className={`${styles.order} pr-4 pl-4 mt-10`}>
-          <div className={styles.total}>
-            <p className='text text_type_digits-medium'>{constructorTotal}</p>
-            <CurrencyIcon type='primary' />
-          </div>
-          <Button
-            htmlType='submit'
-            type='primary'
-            size='large'
-            onClick={(event) => onSubmitOrder(event)}
-          >
-            Оформить заказ
-          </Button>
-        </div>
-      </form>
+        <Button
+          htmlType='button'
+          type='primary'
+          size='large'
+          onClick={onPostOrder}
+          disabled={!hasBun}
+        >
+          Оформить заказ
+        </Button>
+      </div>
     </section>
   )
 }

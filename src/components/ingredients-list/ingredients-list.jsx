@@ -8,38 +8,35 @@ const IngredientsList = () => {
   const bun = useSelector(selectConstructorBun);
   const ingredients = useSelector(selectConstructorIngredients);
 
-  if (Object.keys(bun).length) {
-    return (
-      <div className={styles.container}>
-        <ConstructorElement
-          type='top'
-          isLocked={true}
-          text={`${bun.name} (верх)`}
-          price={bun.price}
-          thumbnail={bun.image}
-          extraClass={`${styles.bun} ml-8`}
-        />
-        <ul className={`${styles.ingredients} ${styles.scroll} pr-4 pl-4`}>
-          {ingredients.map((ingredient, index) => <Ingredient data={ingredient} index={index} key={ingredient._constId}/>)}
-        </ul>
-        <ConstructorElement
-          type='bottom'
-          isLocked={true}
-          text={`${bun.name} (низ)`}
-          price={bun.price}
-          thumbnail={bun.image}
-          extraClass={`${styles.bun} ml-8`}
-        />
-      </div>
-      )}
+  const hasBun = Object.keys(bun).length;
 
-      return (
-        <div className={styles.container}>
-          <ul className={`${styles.ingredients} ${ingredients.length && styles.scroll} pr-4 pl-4`}>
-            {ingredients.map((ingredient, index) => <Ingredient data={ingredient} index={index} key={ingredient._constId}/>)}
-          </ul>
-        </div>
-    )
+  return (
+    <div className={styles.container}>
+    { !!hasBun &&
+      <ConstructorElement
+        type='top'
+        isLocked={true}
+        text={`${bun.name} (верх)`}
+        price={bun.price}
+        thumbnail={bun.image}
+        extraClass={`${styles.bun} ml-8`}
+      />
+    }
+      <ul className={`${styles.ingredients} ${hasBun && styles.scroll} pr-4 pl-4`}>
+        {ingredients.map((ingredient, index) => <Ingredient data={ingredient} index={index} key={ingredient._constId}/>)}
+      </ul>
+    { !!hasBun &&
+      <ConstructorElement
+        type='bottom'
+        isLocked={true}
+        text={`${bun.name} (низ)`}
+        price={bun.price}
+        thumbnail={bun.image}
+        extraClass={`${styles.bun} ml-8`}
+      />
+    }
+    </div>
+  )
 }
 
 export default IngredientsList;
