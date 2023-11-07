@@ -3,6 +3,10 @@
   cursor: pointer;
 }
 
+.dragged {
+  opacity: .8;
+}
+
 .image {
   width: 100%;
   box-sizing: border-box;

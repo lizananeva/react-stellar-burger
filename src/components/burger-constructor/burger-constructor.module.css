@@ -2,6 +2,10 @@
   flex: 1;
 }
 
+.dragging {
+  /* outline: solid 2px #8585AD; */
+}
+
 .order {
   display: flex;
   align-items: center;

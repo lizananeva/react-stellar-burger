@@ -1,10 +1,10 @@
 import styles from './ingredient-details.module.css';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ingredientPropType } from '../../utils/prop-types';
+import { useSelector } from 'react-redux';
+import { selectIngredientDetails } from '../../services/ingredient-details-slice';
 
-const IngredientDetails = ({ data }) => {
-  const { image_large, name, calories, proteins, fat, carbohydrates } = data;
+const IngredientDetails = () => {
+  const ingredientDetails = useSelector(selectIngredientDetails);
+  const { image_large, name, calories, proteins, fat, carbohydrates } = ingredientDetails;
 
   return (
     <div className={styles.content}>
@@ -30,10 +30,6 @@ const IngredientDetails = ({ data }) => {
       </ul>
     </div>
   )
-}
-
-IngredientDetails.propTypes = {
-  data: ingredientPropType.isRequired
 }
 
 export default IngredientDetails;

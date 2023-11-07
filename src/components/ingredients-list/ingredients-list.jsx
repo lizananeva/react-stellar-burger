@@ -1,43 +1,45 @@
 import styles from './ingredients-list.module.css';
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import Ingredient from '../ingredient/ingredient';
+import { useSelector } from 'react-redux';
+import { selectConstructorIngredients, selectConstructorBun } from '../../services/constructor-slice';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ingredientPropType } from '../../utils/prop-types';
+import Ingredient from '../ingredient/ingredient';
 
-const IngredientsList = ({ ingredients }) => {
-  const bun = useMemo(() => ingredients.find(el => el.type === 'bun'), [ingredients]);
-  const fillings = useMemo(() => ingredients.filter(el => el.type !== 'bun'), [ingredients]);
+const IngredientsList = () => {
+  const bun = useSelector(selectConstructorBun);
+  const ingredients = useSelector(selectConstructorIngredients);
 
-  return (
-    <>
-    <div className='pl-8 mb-4'>
-      <ConstructorElement
-        type='top'
-        isLocked={true}
-        text={`${bun.name} (верх)`}
-        price={bun.price}
-        thumbnail={bun.image}
-      />
-    </div>
-    <ul className={`${styles.ingredients} pr-4 pl-4`}>
-      {fillings.map(filling => <Ingredient data={filling} key={filling._id}/>)}
-    </ul>
-    <div className='pl-8 mt-4'>
-      <ConstructorElement
-        type='bottom'
-        isLocked={true}
-        text={`${bun.name} (низ)`}
-        price={bun.price}
-        thumbnail={bun.image}
-      />
-    </div>
-    </>
-  )
-}
+  if (Object.keys(bun).length) {
+    return (
+      <div className={styles.container}>
+        <ConstructorElement
+          type='top'
+          isLocked={true}
+          text={`${bun.name} (верх)`}
+          price={bun.price}
+          thumbnail={bun.image}
+          extraClass={`${styles.bun} ml-8`}
+        />
+        <ul className={`${styles.ingredients} ${styles.scroll} pr-4 pl-4`}>
+          {ingredients.map((ingredient, index) => <Ingredient data={ingredient} index={index} key={ingredient._constId}/>)}
+        </ul>
+        <ConstructorElement
+          type='bottom'
+          isLocked={true}
+          text={`${bun.name} (низ)`}
+          price={bun.price}
+          thumbnail={bun.image}
+          extraClass={`${styles.bun} ml-8`}
+        />
+      </div>
+      )}
 
-IngredientsList.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired
+      return (
+        <div className={styles.container}>
+          <ul className={`${styles.ingredients} ${ingredients.length && styles.scroll} pr-4 pl-4`}>
+            {ingredients.map((ingredient, index) => <Ingredient data={ingredient} index={index} key={ingredient._constId}/>)}
+          </ul>
+        </div>
+    )
 }
 
 export default IngredientsList;

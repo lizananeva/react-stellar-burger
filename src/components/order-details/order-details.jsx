@@ -1,11 +1,14 @@
 import styles from './order-details.module.css';
-import React from 'react';
 import acceptedImg from '../../images/done.svg';
+import { useSelector } from 'react-redux';
+import { selectOrderNumber } from '../../services/order-slice';
 
 const OrderDetails = () => {
+  const orderNumber = useSelector(selectOrderNumber);
+
   return (
     <div className={styles.content}>
-      <h3 className='text text_type_digits-large pt-20 mb-8'>034536</h3>
+      <h3 className='text text_type_digits-large pt-20 mb-8'>{orderNumber}</h3>
       <p className='text text_type_main-medium'>идентификатор заказа</p>
       <img className={`${styles.image} mt-15 mb-15`} src={acceptedImg} alt='Ваш заказ принят' />
       <p className='text text_type_main-default mb-2'>Ваш заказ начали готовить</p>

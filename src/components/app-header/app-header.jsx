@@ -1,5 +1,4 @@
 import styles from './app-header.module.css';
-import React from 'react';
 import NavigationLink from '../navigation-link/navigation-link';
 import { BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 

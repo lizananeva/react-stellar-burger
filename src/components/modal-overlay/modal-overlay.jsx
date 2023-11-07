@@ -1,5 +1,4 @@
 import styles from './modal-overlay.module.css';
-import React from 'react';
 import PropTypes from 'prop-types';
 
 const ModalOverlay = ({ onClose }) => {

@@ -1,5 +1,4 @@
 import styles from './navigation-link.module.css';
-import React from 'react';
 import PropTypes from 'prop-types';
 
 const NavigationLink = ({ children }) => {
@@ -12,6 +11,6 @@ const NavigationLink = ({ children }) => {
 
 NavigationLink.propTypes = {
   children: PropTypes.node.isRequired
-};
+}
 
 export default NavigationLink;
