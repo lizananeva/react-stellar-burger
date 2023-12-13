@@ -1,8 +1,8 @@
 import styles from './burger-ingredients.module.css';
 import { useState, useMemo, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
-import { fetchIngredients, selectIngredients } from '../../services/ingredients-slice';
+import { selectIngredients } from '../../services/ingredients-slice';
 import TabsPanel from '../tabs-panel/tabs-panel';
 import CardsGroup from '../cards-group/cards-group';
 
@@ -35,10 +35,6 @@ const BurgerIngredients = () => {
   const bunCards = useMemo(() => ingredients.filter(el => el.type === 'bun'), [ingredients]);
   const sauceCards = useMemo(() => ingredients.filter(el => el.type === 'sauce'), [ingredients]);
   const mainCards = useMemo(() => ingredients.filter(el => el.type === 'main'), [ingredients]);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => dispatch(fetchIngredients()), []);
 
   return (
     <section className={`${styles.ingredients}`}>

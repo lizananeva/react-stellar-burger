@@ -18,6 +18,20 @@
   gap: 8px;
 }
 
+.link {
+  display: flex;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.active {
+  color: var(--text-primary-color);
+}
+
+.inactive {
+  color: var(--text-inactive-color);
+}
+
 .logo {
   grid-area: logo;
   align-self: center;

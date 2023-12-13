@@ -1,6 +1,0 @@
-.main {
-  display: flex;
-  gap: 40px;
-  padding-left: calc((100vw - 1240px) / 2);
-  padding-right: calc((100vw - 1240px) / 2);
-}

@@ -1,10 +1,15 @@
 import styles from './ingredient-details.module.css';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectIngredientDetails } from '../../services/ingredient-details-slice';
+import { selectIngredientById } from '../../services/ingredients-slice';
 
 const IngredientDetails = () => {
-  const ingredientDetails = useSelector(selectIngredientDetails);
-  const { image_large, name, calories, proteins, fat, carbohydrates } = ingredientDetails;
+  const { id } = useParams();
+  const ingredient = useSelector(selectIngredientById(id));
+
+  if (!ingredient) return null;
+
+  const { image_large, name, calories, proteins, fat, carbohydrates } = ingredient;
 
   return (
     <div className={styles.content}>
@@ -29,7 +34,6 @@ const IngredientDetails = () => {
         </li>
       </ul>
     </div>
-  )
-}
+  )}
 
 export default IngredientDetails;

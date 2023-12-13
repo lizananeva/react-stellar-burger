@@ -18,19 +18,20 @@ const orderSlice = createSlice({
       state.isModalOpen = false;
     }
   },
-  extraReducers(builder) {
-    builder.addCase(postOrderDetails.pending, state => {
-      state.isLoading = true;
-    });
-    builder.addCase(postOrderDetails.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.order = action.payload.order;
-      state.isModalOpen = true;
-    });
-    builder.addCase(postOrderDetails.rejected, (state, action) => {
-      state.isLoading = false;
-      console.log(action.error);
-    });
+  extraReducers: builder => {
+    builder
+      .addCase(postOrderDetails.pending, state => {
+        state.isLoading = true;
+    })
+      .addCase(postOrderDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.order = action.payload.order;
+        state.isModalOpen = true;
+    })
+      .addCase(postOrderDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        console.log(action.error);
+    })
 }});
 
 export const { hideOrder } = orderSlice.actions;
