@@ -1,10 +1,14 @@
 import styles from './burger-constructor.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { postOrderDetails } from '../../services/order-slice';
+import { useNavigate } from 'react-router-dom';
+import { postOrderDetails, hideOrder, selectIsOrderModalOpen, selectIsOrderLoading } from '../../services/order-slice';
+import { selectUser } from '../../services/auth-slice';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientsList from '../ingredients-list/ingredients-list';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 import {
   addIngredient,
   eraseIngredients,
@@ -17,6 +21,10 @@ const BurgerConstructor = () => {
   const constructorTotal = useSelector(selectConstructorTotal);
   const orderIds = useSelector(selectAllConstructorId);
   const hasBun = Object.keys(useSelector(selectConstructorBun)).length;
+  const user = useSelector(selectUser);
+  const isOrderModalOpen = useSelector(selectIsOrderModalOpen);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -32,11 +40,16 @@ const BurgerConstructor = () => {
   });
 
   const onPostOrder = () => {
-    dispatch(postOrderDetails({ingredients: orderIds}));
-    dispatch(eraseIngredients());
+    if (user) {
+      dispatch(postOrderDetails({ingredients: orderIds}));
+      dispatch(eraseIngredients());
+    } else {
+      navigate('/login');
+    }
   }
 
   return (
+  <>
     <section className={`${styles.constructor} pt-25 pl-4`}>
       <div className={isDragging ? styles.dragging : ''} ref={dropRef}>
         <IngredientsList />
@@ -57,7 +70,12 @@ const BurgerConstructor = () => {
         </Button>
       </div>
     </section>
-  )
-}
+    {isOrderModalOpen && (
+      <Modal title={null} onCloseModal={() => dispatch(hideOrder())}>
+        <OrderDetails />
+      </Modal>
+    )}
+</>
+)}
 
 export default BurgerConstructor;

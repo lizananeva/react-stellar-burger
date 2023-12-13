@@ -9,7 +9,7 @@ const CardsGroup = forwardRef(({ title, cards, id }, ref) => {
     <section id={id} className={`${styles.cards} mb-10`} ref={ref} >
       <h2 className='text text_type_main-medium'>{title}</h2>
       <ul className={`${styles.list} pt-6 pr-1 pl-4`}>
-        {cards.map(card => <Card data={card} key={card._id} />)}
+        {cards.map(card => <Card ingredient={card} key={card._id} />)}
       </ul>
     </section>
   )

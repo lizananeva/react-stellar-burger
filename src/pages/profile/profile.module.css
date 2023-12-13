@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  padding-top: calc(var(--offset-base-size) * 30);
+}
+
+.column {
+  max-width: 320px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.active {
+  color: var(--text-primary-color);
+}
+
+.inactive {
+  color: var(--text-inactive-color);
+}
+
+.span {
+  line-height: 32px;
+}
+
+.hint {
+  opacity: .4;
+  color: var(--text-inactive-color);
+}
