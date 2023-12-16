@@ -1,5 +1,5 @@
 import styles from './layout.module.css';
-import { FC, useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchIngredients, selectIsIngredientsLoading, selectLoadingError } from '../../services/ingredients-slice';
 import AppHeader from '../app-header/app-header';

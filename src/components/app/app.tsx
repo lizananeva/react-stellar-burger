@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { checkUserAuth } from '../../utils/api';

@@ -1,5 +1,5 @@
 import styles from './reset-password.module.css';
-import { FC } from 'react';
+import { FC, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsEmailChecked } from '../../services/auth-slice';
 import { fetchResetPassword } from '../../utils/api';
@@ -13,7 +13,7 @@ const ResetPassword: FC = () => {
   const dispatch = useDispatch();
   const {values, setValues, onChange} = useForm({password: '', token: ''});
 
-  const resetPassword = (event: React.SyntheticEvent) => {
+  const resetPassword = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(fetchResetPassword(values));
     setValues({password: '', token: ''});

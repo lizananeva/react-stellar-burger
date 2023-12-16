@@ -1,5 +1,5 @@
 import styles from './register.module.css';
-import { FC } from 'react';
+import { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/use-form';
 import { fetchRegister } from '../../utils/api';
@@ -11,7 +11,7 @@ const Register: FC = () => {
   const dispatch = useDispatch();
   const {values, setValues, onChange} = useForm({name: '', email: '', password: ''});
 
-  const register = (event: React.SyntheticEvent) => {
+  const register = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(fetchRegister(values));
     setValues({name: '', email: '', password: ''});

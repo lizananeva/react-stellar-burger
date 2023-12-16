@@ -1,5 +1,5 @@
 import styles from './profile.module.css';
-import { FC, MouseEventHandler } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchLogout } from '../../utils/api';
 import { useLocation, NavLink, Outlet } from 'react-router-dom';
@@ -8,7 +8,7 @@ const Profile: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const logout: MouseEventHandler = event => {
+  const logout = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     dispatch(fetchLogout());
   }
@@ -32,7 +32,7 @@ const Profile: FC = () => {
       <p className={`${styles.hint} text text_type_main-default`}>
         {location.pathname.includes('/orders')
           ? 'В этом разделе вы можете просмотреть свою историю заказов'
-          : 'В этом разделе вы можете изменить свои персональные данные'}
+          : 'В этом разделе вы можете\nизменить свои персональные данные'}
       </p>
     </aside>
     <Outlet />

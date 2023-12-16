@@ -1,5 +1,5 @@
 import styles from './profile-edit.module.css';
-import { FC, MouseEventHandler, useEffect, useState, useRef } from 'react';
+import { useState, useRef, useEffect, FC, FormEvent, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/use-form';
 import { fetchUpdateUser } from '../../../utils/api';
@@ -38,7 +38,7 @@ const ProfileEditForm: FC = () => {
     }
   }
 
-  const onSubmit = (event: React.SyntheticEvent) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(fetchUpdateUser(values));
     localStorage.removeItem('userData');
@@ -50,17 +50,17 @@ const ProfileEditForm: FC = () => {
     setIsEdit(false);
   }
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChangeDefault(event);
     setIsEdit(true);
   }
 
-  const onIconClick: MouseEventHandler = event => {
+  const onIconClick = () => {
     setTimeout(() => inputRef.current?.focus(), 0);
     setDisabled(false);
   }
 
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const onBlur = () => {
     setDisabled(true);
   }
 

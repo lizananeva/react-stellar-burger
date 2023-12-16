@@ -1,5 +1,5 @@
-import { setUser, setAuthChecked } from '../services/auth-slice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setUser, setAuthChecked } from '../services/auth-slice';
 import { TValues } from './types';
 
 type TRequestOptions = RequestInit & {
@@ -24,16 +24,10 @@ export const checkResponse = (response: Response) => {
   return response.json().then(response => Promise.reject(`Ошибка ${response.status}`));
 }
 
-const request = (endpoint: string, options: TRequestOptions) =>
+const request = (endpoint: string, options?: TRequestOptions) =>
   fetch(`${config.baseUrl}${endpoint}`, options).then(checkResponse);
 
-export const getIngredientsData = async () =>
-  await request('/ingredients', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
+export const getIngredientsData = async () => await request('/ingredients');
 
 export const postOrder = (ingredients: TIngredients) =>
   request('/orders', {

@@ -1,9 +1,9 @@
 import styles from './form.module.css';
-import { FC, ReactNode } from 'react';
+import { FC, FormEvent, ReactNode } from 'react';
 
 type TFormProps = {
   title: string,
-  onSubmit: (event: React.SyntheticEvent) => void,
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void,
   children: ReactNode[]
 }
 

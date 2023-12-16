@@ -1,5 +1,5 @@
 import styles from './forgot-password.module.css';
-import { FC } from 'react';
+import { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { setEmailChecked } from '../../services/auth-slice';
 import { fetchForgotPassword } from '../../utils/api';
@@ -13,7 +13,7 @@ const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
   const {values, setValues, onChange} = useForm({email: ''});
 
-  const forgotPassword = (event: React.SyntheticEvent) => {
+  const forgotPassword = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(fetchForgotPassword(values)) // @ts-ignore
       .then(response => dispatch(setEmailChecked(response.payload.success)));

@@ -1,5 +1,5 @@
 import styles from './burger-ingredients.module.css';
-import { FC, useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, FC } from 'react';
 import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { selectIngredients } from '../../services/ingredients-slice';

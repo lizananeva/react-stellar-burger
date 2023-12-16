@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect } from 'react';
+import { useEffect, FC, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { setAuthChecked, selectIsAuthChecked, selectUser } from '../../services/auth-slice';

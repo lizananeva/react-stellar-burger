@@ -1,5 +1,5 @@
 import styles from './login.module.css';
-import { FC } from 'react';
+import { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/use-form';
 import { fetchLogin } from '../../utils/api';
@@ -11,7 +11,7 @@ const Login: FC = () => {
   const dispatch = useDispatch();
   const {values, onChange} = useForm({email: '', password: ''});
 
-  const login = (event: React.SyntheticEvent) => {
+  const login = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(fetchLogin(values));
   }
