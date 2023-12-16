@@ -32,4 +32,5 @@
 .hint {
   opacity: .4;
   color: var(--text-inactive-color);
+  white-space: pre-line
 }
