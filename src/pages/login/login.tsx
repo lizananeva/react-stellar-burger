@@ -18,7 +18,7 @@ const Login: FC = () => {
 
   return (
     <Form title='Вход' onSubmit={login}>
-      <>
+      <div className={styles.content}>
         <EmailInput
           name={'email'}
           value={values.email}
@@ -31,8 +31,8 @@ const Login: FC = () => {
           onChange={onChange}
         />
         <Button htmlType='submit' type='primary' size='medium'>Войти</Button>
-      </>
-      <>
+      </div>
+      <div>
         <p className='text text_type_main-default text_color_inactive mb-4'>
           Вы — новый пользователь?
           <Link to='/register' className={`${styles.link} text text_color_accent pl-2`}>Зарегистрироваться</Link>
@@ -41,7 +41,7 @@ const Login: FC = () => {
           Забыли пароль?
           <Link to='/forgot-password' className={`${styles.link} text text_color_accent pl-2`}>Восстановить пароль</Link>
         </p>
-      </>
+      </div>
     </Form>
   )
 }

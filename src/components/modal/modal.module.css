@@ -16,9 +16,11 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   overflow: hidden;
-  /* visibility: hidden;
+/*
+  visibility: hidden;
   opacity: 0;
-  transition: visibility .2s, opacity .3s linear; */
+  transition: visibility .2s, opacity .3s linear;
+*/
 }
 
 .close {

@@ -5,10 +5,16 @@ import { useAppSelector } from '../../utils/hooks';
 import { useLocation } from 'react-router-dom';
 import { selectUser } from '../../services/reducers/auth-slice';
 import { selectIngredients } from '../../services/reducers/ingredients-slice';
-import { setStatusClass, setStatusText, getOrderIngredients, getTotalPrice } from '../../utils/utils';
 import { TOrder } from '../../utils/types';
+import {
+  setStatusClass,
+  setStatusText,
+  getIngredientsWithCount,
+  getUniqueIngredients,
+  getUniqueIngredientsWithCount,
+  getOrderIngredients } from '../../utils/utils';
 
-type TOrderProps = {
+  type TOrderProps = {
   params: TOrder
 }
 
@@ -24,8 +30,16 @@ const Order: FC<TOrderProps> = ({ params }) => {
   const allIngredients = useAppSelector(selectIngredients);
   const user = useAppSelector(selectUser);
 
-  const orderIngredients = getOrderIngredients(ingredients.slice(0, 6), allIngredients);
-  const totalPrice = getTotalPrice(orderIngredients);
+  const ingredientsWithCount = getIngredientsWithCount(ingredients, allIngredients);
+  const uniqueIngredients = getUniqueIngredients(ingredients);
+  const uniqueIngredientsWithCount = getUniqueIngredientsWithCount(uniqueIngredients, ingredientsWithCount);
+  const orderIngredients = getOrderIngredients(uniqueIngredientsWithCount, allIngredients);
+
+  const totalPrice = orderIngredients.reduce((total, ingredient) => {
+    const ingredientCount = ingredient.type === 'bun' ? 2 : ingredient.count || 1;
+    const price = ingredient.price || 0;
+    return total + price * ingredientCount;
+  }, 0);
 
   return (
     <article className={`${styles.order} p-6`}>
@@ -42,7 +56,7 @@ const Order: FC<TOrderProps> = ({ params }) => {
       </div>
       <div className={styles.row}>
         <ul className={styles.images}>
-          {orderIngredients.map((ingredient, index) => (
+          {orderIngredients.slice(0, 6).map((ingredient, index) => (
             <li key={index} className={`${styles.ingredient} ${styles[`ingredient_${index}`]}`}>
               <img
                 className={styles.image}

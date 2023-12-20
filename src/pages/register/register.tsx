@@ -19,7 +19,7 @@ const Register: FC = () => {
 
   return (
     <Form title='Регистрация' onSubmit={register}>
-      <>
+      <div className={styles.content}>
         <Input
           type={'text'}
           placeholder={'Имя'}
@@ -39,13 +39,11 @@ const Register: FC = () => {
           onChange={onChange}
         />
         <Button htmlType='submit' type='primary' size='medium'>Зарегистрироваться</Button>
-      </>
-      <>
-        <p className='text text_type_main-default text_color_inactive mb-4'>
-          Уже зарегистрированы?
-          <Link to='/login' className={`${styles.link} text text_color_accent pl-2`}>Войти</Link>
-        </p>
-      </>
+      </div>
+      <p className='text text_type_main-default text_color_inactive mb-4'>
+        Уже зарегистрированы?
+        <Link to='/login' className={`${styles.link} text text_color_accent pl-2`}>Войти</Link>
+      </p>
     </Form>
   )
 }

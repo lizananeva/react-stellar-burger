@@ -5,8 +5,14 @@ import { useLocation, useParams } from 'react-router-dom';
 import { selectOrders } from '../../services/reducers/feed-slice';
 import { selectIngredients } from '../../services/reducers/ingredients-slice';
 import { fetchOrders } from '../../services/reducers/feed-slice';
-import { setStatusClass, setStatusText, getOrderIngredients, getTotalPrice } from '../../utils/utils';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  setStatusClass,
+  setStatusText,
+  getIngredientsWithCount,
+  getUniqueIngredients,
+  getUniqueIngredientsWithCount,
+  getOrderIngredients } from '../../utils/utils';
 
 const OrderInfo: FC = () => {
   const { id } = useParams();
@@ -24,34 +30,30 @@ const OrderInfo: FC = () => {
     }
   }, [location.pathname, background, dispatch, id]);
 
-  const thisOrder = orders?.orders.find(order => order.number.toString() === id) || null;
+  const currentOrder = orders?.orders.find(order => order.number.toString() === id) || null;
 
-  if (!thisOrder) return null;
+  if (!currentOrder) return null;
 
-  const statusClass = setStatusClass(thisOrder.status);
-  const statusText = setStatusText(thisOrder.status);
+  const statusClass = setStatusClass(currentOrder.status);
+  const statusText = setStatusText(currentOrder.status);
 
-  const orderIngredients = getOrderIngredients(thisOrder.ingredients, allIngredients);
-  const totalPrice = getTotalPrice(orderIngredients);
+  const ingredientsWithCount = getIngredientsWithCount(currentOrder.ingredients, allIngredients);
+  const uniqueIngredients = getUniqueIngredients(currentOrder.ingredients);
+  const uniqueIngredientsWithCount = getUniqueIngredientsWithCount(uniqueIngredients, ingredientsWithCount);
+  const orderIngredients = getOrderIngredients(uniqueIngredientsWithCount, allIngredients);
 
-  const getIngredientsCount = (id?: string) => {
-    let count = 0;
-    const ingredient = allIngredients?.find(element => element?._id === id);
-
-    ingredient?.type === 'bun'
-      ? count = 2
-      : thisOrder?.ingredients.forEach(ingredientId => {
-          if (ingredientId === id) count++;
-        });
-    return count;
-  }
+  const totalPrice = orderIngredients.reduce((total, ingredient) => {
+    const ingredientCount = ingredient.type === 'bun' ? 2 : ingredient.count || 1;
+    const price = ingredient.price || 0;
+    return total + price * ingredientCount;
+  }, 0);
 
   return (
     <div className={background ? styles['modal-content'] : styles['full-page-content']}>
       <p className={`${background ? styles['modal-title'] : styles['full-page-title']} text text_type_digits-default mb-5`}>
-        #{thisOrder.number}
+        #{currentOrder.number}
       </p>
-      <h2 className={`text text_type_main-medium ${background ? 'mb-2' : 'mb-4'}`}>{thisOrder.name}</h2>
+      <h2 className={`text text_type_main-medium ${background ? 'mb-2' : 'mb-4'}`}>{currentOrder.name}</h2>
       <p className={`text text_type_main-default mb-15 ${statusClass}`}>{statusText}</p>
       <p className='text text_type_main-medium mb-6'>Состав:</p>
       <ul className={`${styles.list} pr-6 mb-10`}>
@@ -62,7 +64,7 @@ const OrderInfo: FC = () => {
               <p className={`${styles.name} text text_type_main-small`}>{ingredient?.name}</p>
               <div className={styles.total}>
                 <p className='text text_type_digits-default mr-2'>
-                  {`${getIngredientsCount(ingredient?._id)} x ${ingredient?.price}`}
+                  {`${ingredient.count} x ${ingredient.price}`}
                 </p>
                 <CurrencyIcon type='primary' />
               </div>
@@ -72,7 +74,7 @@ const OrderInfo: FC = () => {
       </ul>
       <div className={styles.footer}>
         <FormattedDate
-          date={new Date(thisOrder.createdAt)}
+          date={new Date(currentOrder.createdAt)}
           className='text text_color_inactive text_type_main-default'
         />
         <div className={styles.total}>
