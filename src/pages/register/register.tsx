@@ -1,6 +1,6 @@
 import styles from './register.module.css';
 import { FC, FormEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../utils/hooks';
 import { useForm } from '../../hooks/use-form';
 import { fetchRegister } from '../../utils/api';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-de
 import Form from '../../components/form/form';
 
 const Register: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {values, setValues, onChange} = useForm({name: '', email: '', password: ''});
 
   const register = (event: FormEvent<HTMLFormElement>) => {

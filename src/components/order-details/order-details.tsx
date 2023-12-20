@@ -1,11 +1,11 @@
 import styles from './order-details.module.css';
 import { FC } from 'react';
 import acceptedImg from '../../images/done.svg';
-import { useSelector } from 'react-redux';
-import { selectOrderNumber } from '../../services/order-slice';
+import { useAppSelector } from '../../utils/hooks';
+import { selectOrderNumber } from '../../services/reducers/order-slice';
 
 const OrderDetails: FC = () => {
-  const orderNumber = useSelector(selectOrderNumber);
+  const orderNumber = useAppSelector(selectOrderNumber);
 
   return (
     <div className={styles.content}>

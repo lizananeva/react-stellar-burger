@@ -1,15 +1,14 @@
 import styles from './profile-edit.module.css';
 import { useState, useRef, useEffect, FC, FormEvent, ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
 import { useForm } from '../../../hooks/use-form';
 import { fetchUpdateUser } from '../../../utils/api';
-import { selectUser } from '../../../services/auth-slice';
+import { selectUser } from '../../../services/reducers/auth-slice';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 type TUser = {
   name: string,
-  email: string,
-  password: string
+  email: string
 }
 
 const ProfileEditForm: FC = () => {
@@ -18,24 +17,13 @@ const ProfileEditForm: FC = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const user = useSelector(selectUser);
-  const { name, email } = user;
-  const { values, setValues, onChange: onChangeDefault } = useForm({
-    name: name || '',
-    email: email || '',
-    password: ''
-  });
+  const user = useAppSelector(selectUser);
+  const { values, setValues, onChange: onChangeDefault } = useForm({ name: '', email: '', password: '' });
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const setDefaultInputs = (user: TUser) => {
-    if (name && email) {
-      setValues({
-        name: name,
-        email: email,
-        password: ''
-      });
-    }
+    if (user && user.name && user.email) setValues({ name: user.name, email: user.email, password: '' });
   }
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -46,7 +34,7 @@ const ProfileEditForm: FC = () => {
   }
 
   const onReset = () => {
-    setDefaultInputs(user);
+    if (user) setDefaultInputs(user);
     setIsEdit(false);
   }
 
@@ -65,8 +53,8 @@ const ProfileEditForm: FC = () => {
   }
 
   useEffect(() => {
-    setDefaultInputs(user);
-  }, [name, email]);
+    if (user) setDefaultInputs(user);
+  }, [user?.name, user?.email]);
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

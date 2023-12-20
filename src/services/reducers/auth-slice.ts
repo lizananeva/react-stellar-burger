@@ -1,7 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateUser, fetchForgotPassword, fetchResetPassword } from '../utils/api';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateUser, fetchForgotPassword, fetchResetPassword } from '../../utils/api';
+import { RootStore } from '../store';
+import { TUser } from '../../utils/types';
 
-const initialState = {
+type TState = {
+  user: { name: string; email: string } | null,
+  isAuthChecked: boolean,
+  isEmailChecked: boolean,
+  error: string | unknown
+}
+
+const initialState: TState = {
   user: null,
   isAuthChecked: false,
   isEmailChecked: false,
@@ -12,13 +21,13 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<TUser>) => {
       state.user = action.payload;
     },
-    setAuthChecked: (state, action) => {
+    setAuthChecked: (state, action: PayloadAction<boolean>) => {
       state.isAuthChecked = action.payload;
     },
-    setEmailChecked: (state, action) => {
+    setEmailChecked: (state, action: PayloadAction<boolean>) => {
       state.isEmailChecked = action.payload
     }
   },
@@ -75,6 +84,6 @@ export const { setUser, setAuthChecked, setEmailChecked } = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectUser = state => state.auth.user;
-export const selectIsAuthChecked = state => state.auth.isAuthChecked;
-export const selectIsEmailChecked = state => state.auth.isEmailChecked;
+export const selectUser = (state: RootStore) => state.auth.user;
+export const selectIsAuthChecked = (state: RootStore) => state.auth.isAuthChecked;
+export const selectIsEmailChecked = (state: RootStore) => state.auth.isEmailChecked;

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setUser, setAuthChecked } from '../services/auth-slice';
+import { setUser, setAuthChecked } from '../services/reducers/auth-slice';
+import { AppDispatch } from '../services/store';
 import { TValues } from './types';
 
 type TRequestOptions = RequestInit & {
@@ -9,6 +10,8 @@ type TRequestOptions = RequestInit & {
 type TIngredients = {
   ingredients: string[]
 }
+
+export const baseWss = 'wss://norma.nomoreparties.space';
 
 const config = {
   baseUrl: 'https://norma.nomoreparties.space/api',
@@ -29,11 +32,14 @@ const request = (endpoint: string, options?: TRequestOptions) =>
 
 export const getIngredientsData = async () => await request('/ingredients');
 
+export const getOrdersData = async (number: string) => await request(`/orders/${number}`);
+
 export const postOrder = (ingredients: TIngredients) =>
   request('/orders', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json;charset=utf-8',
+      authorization: localStorage.getItem('accessToken') as string
     },
     body: JSON.stringify(ingredients)
   });
@@ -66,8 +72,8 @@ const fetchWithRefresh = async (url: string, options: TRequestOptions) => {
   }
 }
 
-export const getUser = () => // @ts-ignore
-  dispatch =>
+export const getUser = () =>
+  (dispatch: AppDispatch) =>
     fetchWithRefresh(`${config.baseUrl}/auth/user`, {
       method: 'GET',
       headers: {
@@ -82,8 +88,8 @@ export const getUser = () => // @ts-ignore
       }
     });
 
-export const checkUserAuth = () => // @ts-ignore
-  dispatch => {
+export const checkUserAuth = () =>
+  (dispatch: AppDispatch) => {
     if (localStorage.getItem('accessToken')) {
       dispatch(getUser())
         .catch(() => {

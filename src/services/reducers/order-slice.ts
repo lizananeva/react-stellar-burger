@@ -1,8 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { postOrder } from '../utils/api';
+import { postOrder } from '../../utils/api';
+import { RootStore } from '../store';
 
-const initialState = {
-  order: {},
+type TState = {
+  order: { ingredients: string[] | null, number: number | null },
+  isModalOpen: boolean,
+  isLoading: boolean
+}
+
+const initialState: TState = {
+  order: { ingredients: null, number: null },
   isModalOpen: false,
   isLoading: false
 }
@@ -14,7 +21,7 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     hideOrder(state) {
-      state.order = {};
+      state.order = { ingredients: null, number: null };
       state.isModalOpen = false;
     }
   },
@@ -38,6 +45,6 @@ export const { hideOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;
 
-export const selectOrderNumber = state => state.order.order.number;
-export const selectIsOrderModalOpen = state => state.order.isModalOpen;
-export const selectIsOrderLoading = state => state.order.isLoading;
+export const selectOrderNumber = (state: RootStore) => state.order.order.number;
+export const selectIsOrderModalOpen = (state: RootStore) => state.order.isModalOpen;
+export const selectIsOrderLoading = (state: RootStore) => state.order.isLoading;

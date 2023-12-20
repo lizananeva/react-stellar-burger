@@ -1,6 +1,6 @@
 import styles from './login.module.css';
 import { FC, FormEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../utils/hooks';
 import { useForm } from '../../hooks/use-form';
 import { fetchLogin } from '../../utils/api';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer
 import Form from '../../components/form/form';
 
 const Login: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {values, onChange} = useForm({email: '', password: ''});
 
   const login = (event: FormEvent<HTMLFormElement>) => {

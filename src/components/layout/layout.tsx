@@ -1,15 +1,15 @@
 import styles from './layout.module.css';
 import { useEffect, FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchIngredients, selectIsIngredientsLoading, selectLoadingError } from '../../services/ingredients-slice';
+import { useAppSelector, useAppDispatch } from '../../utils/hooks';
+import { fetchIngredients, selectIsIngredientsLoading, selectLoadingError } from '../../services/reducers/ingredients-slice';
 import AppHeader from '../app-header/app-header';
 import { Outlet } from 'react-router-dom';
 
 const Layout: FC = () => {
-  const isLoading = useSelector(selectIsIngredientsLoading);
-  const isError = useSelector(selectLoadingError);
+  const isLoading = useAppSelector(selectIsIngredientsLoading);
+  const isError = useAppSelector(selectLoadingError);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchIngredients());

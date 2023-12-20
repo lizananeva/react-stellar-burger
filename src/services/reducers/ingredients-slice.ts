@@ -1,7 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getIngredientsData } from '../utils/api';
+import { getIngredientsData } from '../../utils/api';
+import { RootStore } from '../store';
+import { TIngredient } from '../../utils/types';
 
-const initialState = {
+type TState = {
+  ingredients: TIngredient[],
+  isLoading: boolean,
+  error: {} | null
+}
+
+const initialState: TState = {
   ingredients: [],
   isLoading: false,
   error: null
@@ -37,7 +45,7 @@ const ingredientsSlice = createSlice({
 
 export default ingredientsSlice.reducer;
 
-export const selectIngredients = state => state.ingredients.ingredients;
-export const selectIsIngredientsLoading = state => state.ingredients.isLoading;
-export const selectLoadingError = state => state.ingredients.error;
-export const selectIngredientById = id => state => state.ingredients.ingredients.find(data => data._id === id);
+export const selectIngredients = (state: RootStore) => state.ingredients.ingredients;
+export const selectIsIngredientsLoading = (state: RootStore) => state.ingredients.isLoading;
+export const selectLoadingError = (state: RootStore) => state.ingredients.error;
+export const selectIngredientById = (id?: string) => (state: RootStore) => state.ingredients.ingredients.find(data => data._id === id);

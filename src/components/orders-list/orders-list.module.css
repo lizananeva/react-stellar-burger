@@ -1,0 +1,28 @@
+.feed {
+  flex: 1;
+}
+
+.orders {
+  height: calc(100vh - 188px - 40px);
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0 8px 0 0;
+  margin: 0;
+}
+
+.orders::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orders::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.orders::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}

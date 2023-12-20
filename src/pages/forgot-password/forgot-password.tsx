@@ -1,7 +1,7 @@
 import styles from './forgot-password.module.css';
 import { FC, FormEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import { setEmailChecked } from '../../services/auth-slice';
+import { useAppDispatch } from '../../utils/hooks';
+import { setEmailChecked } from '../../services/reducers/auth-slice';
 import { fetchForgotPassword } from '../../utils/api';
 import { useForm } from '../../hooks/use-form';
 import { useNavigate, Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import Form from '../../components/form/form';
 
 const ForgotPassword: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {values, setValues, onChange} = useForm({email: ''});
 
   const forgotPassword = (event: FormEvent<HTMLFormElement>) => {
