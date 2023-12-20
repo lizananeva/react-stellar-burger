@@ -1,7 +1,7 @@
 import styles from './reset-password.module.css';
 import { FC, FormEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectIsEmailChecked } from '../../services/auth-slice';
+import { useAppSelector, useAppDispatch } from '../../utils/hooks';
+import { selectIsEmailChecked } from '../../services/reducers/auth-slice';
 import { fetchResetPassword } from '../../utils/api';
 import { useForm } from '../../hooks/use-form';
 import { useNavigate, Navigate, Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import Form from '../../components/form/form';
 
 const ResetPassword: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {values, setValues, onChange} = useForm({password: '', token: ''});
 
   const resetPassword = (event: FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ const ResetPassword: FC = () => {
     navigate('/');
   };
 
-  const isEmailChecked = useSelector(selectIsEmailChecked);
+  const isEmailChecked = useAppSelector(selectIsEmailChecked);
 
   if (!isEmailChecked) {
     return <Navigate to='/forgot-password' />;
@@ -28,7 +28,7 @@ const ResetPassword: FC = () => {
 
   return (
     <Form title='Восстановление пароля' onSubmit={resetPassword}>
-      <>
+      <div className={styles.content}>
         <PasswordInput
           placeholder={'Введите новый пароль'}
           name={'password'}
@@ -45,13 +45,11 @@ const ResetPassword: FC = () => {
           extraClass='mb-6'
         />
         <Button htmlType='submit' type='primary' size='medium'>Сохранить</Button>
-      </>
-      <>
-        <p className='text text_type_main-default text_color_inactive mb-4'>
-          Вспомнили пароль?
-          <Link to='/login' className={`${styles.link} text text_color_accent pl-2`}>Войти</Link>
-        </p>
-      </>
+      </div>
+      <p className='text text_type_main-default text_color_inactive mb-4'>
+        Вспомнили пароль?
+        <Link to='/login' className={`${styles.link} text text_color_accent pl-2`}>Войти</Link>
+      </p>
     </Form>
   )
 }

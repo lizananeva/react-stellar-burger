@@ -1,0 +1,79 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--background);
+  border-radius: 40px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  max-width: 536px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.images {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ingredient {
+    display: flex;
+    flex-grow: 1;
+    border: double 2px transparent;
+    border-radius: 50%;
+    background-image:
+      linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
+      linear-gradient(63.18deg, #801ab3, #4c4cff);
+    border-image-slice: 20;
+    background-clip: content-box, border-box;
+}
+
+.ingredient_0 {
+  z-index: 6;
+}
+
+.ingredient_1 {
+  z-index: 5;
+  transform: translate(-16px);
+}
+
+.ingredient_2 {
+  z-index: 4;
+  transform: translate(-32px);
+}
+
+.ingredient_3 {
+  z-index: 3;
+  transform: translate(-48px);
+}
+
+.ingredient_4 {
+  z-index: 2;
+  transform: translate(-64px);
+}
+
+.ingredient_5 {
+  z-index: 1;
+  transform: translate(-80px);
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

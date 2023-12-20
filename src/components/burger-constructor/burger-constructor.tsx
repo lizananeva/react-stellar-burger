@@ -1,10 +1,10 @@
 import styles from './burger-constructor.module.css';
 import { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../utils/hooks';
 import { useDrop } from 'react-dnd';
 import { useNavigate } from 'react-router-dom';
-import { postOrderDetails, hideOrder, selectIsOrderModalOpen } from '../../services/order-slice';
-import { selectUser } from '../../services/auth-slice';
+import { postOrderDetails, hideOrder, selectIsOrderModalOpen } from '../../services/reducers/order-slice';
+import { selectUser } from '../../services/reducers/auth-slice';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientsList from '../ingredients-list/ingredients-list';
@@ -16,19 +16,19 @@ import {
   selectConstructorBun,
   selectConstructorTotal,
   selectAllConstructorId
-} from '../../services/constructor-slice';
+} from '../../services/reducers/constructor-slice';
 import { TIngredient, TIngredientWithId } from '../../utils/types';
 
 const BurgerConstructor: FC = () => {
-  const constructorTotal = useSelector(selectConstructorTotal);
-  const orderIds = useSelector(selectAllConstructorId);
-  const hasBun: number = Object.keys(useSelector(selectConstructorBun)).length;
-  const user = useSelector(selectUser);
-  const isOrderModalOpen = useSelector(selectIsOrderModalOpen);
+  const constructorTotal = useAppSelector(selectConstructorTotal);
+  const orderIds = useAppSelector(selectAllConstructorId);
+  const hasBun: boolean = !!useAppSelector(selectConstructorBun);
+  const user = useAppSelector(selectUser);
+  const isOrderModalOpen = useAppSelector(selectIsOrderModalOpen);
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [{ isDragging }, dropRef] = useDrop({
     accept: 'ingredient',

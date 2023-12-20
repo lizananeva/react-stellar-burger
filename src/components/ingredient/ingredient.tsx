@@ -1,8 +1,8 @@
 import styles from './ingredient.module.css';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { useDrag, useDrop } from 'react-dnd';
-import { removeIngredient, moveIngredient, selectConstructorIngredients } from '../../services/constructor-slice';
+import { removeIngredient, moveIngredient, selectConstructorIngredients } from '../../services/reducers/constructor-slice';
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIngredientWithId } from '../../utils/types';
 
@@ -13,9 +13,9 @@ type TIngredientProps = {
 
 const Ingredient: FC<TIngredientProps> = ({ data, index }) => {
   const { name, price, image } = data;
-  const ingredients = useSelector(selectConstructorIngredients);
+  const ingredients = useAppSelector(selectConstructorIngredients);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const findIndex = (item: TIngredientWithId) => {
     return ingredients.indexOf(item);

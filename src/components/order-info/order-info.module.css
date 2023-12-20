@@ -1,0 +1,75 @@
+.modal-content {}
+
+.full-page-content {
+  max-width: 640px;
+  width: 100%;
+  padding-top: 120px;
+  margin: 0 auto;
+}
+
+.modal-title {
+  text-align: start;
+  line-height: 64px;
+}
+
+.full-page-title {
+  text-align: center;
+  line-height: 64px;
+}
+
+.list {
+  max-height: 312px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 0;
+  margin-top: 0;
+  overflow-y: scroll;
+  list-style: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: center;
+  border: double 2px transparent;
+  border-radius: 50%;
+  background-image:
+    linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
+    linear-gradient(63.18deg, #801ab3, #4c4cff);
+  border-image-slice: 20;
+  background-clip: content-box, border-box;
+}
+
+.name {
+  flex: 1;
+}
+
+.total {
+  display: flex;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

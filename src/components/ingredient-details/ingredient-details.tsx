@@ -1,12 +1,12 @@
 import styles from './ingredient-details.module.css';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectIngredientById } from '../../services/ingredients-slice';
+import { useAppSelector } from '../../utils/hooks';
+import { selectIngredientById } from '../../services/reducers/ingredients-slice';
 
 const IngredientDetails: FC = () => {
   const { id } = useParams();
-  const ingredient = useSelector(selectIngredientById(id));
+  const ingredient = useAppSelector(selectIngredientById(id));
 
   if (!ingredient) return null;
 

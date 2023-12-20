@@ -14,7 +14,7 @@ const AppHeader: FC = () => {
           <BurgerIcon type='primary' />
           <p className='text text_type_main-default ml-2'>Конструктор</p>
         </NavLink>
-        <NavLink to='/orders' className={setActiveLink}>
+        <NavLink to='/feed' className={setActiveLink}>
           <ListIcon type='secondary' />
           <p className='text text_type_main-default ml-2'>Лента заказов</p>
         </NavLink>

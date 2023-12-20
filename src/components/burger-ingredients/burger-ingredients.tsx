@@ -1,8 +1,8 @@
 import styles from './burger-ingredients.module.css';
 import { useState, useMemo, useEffect, FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../utils/hooks';
 import { useInView } from 'react-intersection-observer';
-import { selectIngredients } from '../../services/ingredients-slice';
+import { selectIngredients } from '../../services/reducers/ingredients-slice';
 import TabsPanel from '../tabs-panel/tabs-panel';
 import CardsGroup from '../cards-group/cards-group';
 import { TIngredient } from '../../utils/types';
@@ -33,7 +33,7 @@ const BurgerIngredients: FC = () => {
     setActiveTab(switchActiveTab(bunInView, sauceInView, mainInView));
   }, [bunInView, sauceInView, mainInView]);
 
-  const ingredients = useSelector(selectIngredients) as TIngredient[];
+  const ingredients = useAppSelector(selectIngredients) as TIngredient[];
 
   const bunCards = useMemo(() => ingredients?.filter(el => el.type === 'bun'), [ingredients]);
   const sauceCards = useMemo(() => ingredients?.filter(el => el.type === 'sauce'), [ingredients]);
