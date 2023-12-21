@@ -2,18 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootStore } from '../store';
 import { TIngredientWithId } from '../../utils/types';
 
-type TState = {
-  bun: TIngredientWithId | null,
-  ingredients: TIngredientWithId[]
-}
-
 type TMoveAction = {
   indexFrom: number,
   indexTo: number,
   ingredient: TIngredientWithId
 }
 
-const initialState: TState = {
+type TState = {
+  bun: TIngredientWithId | null,
+  ingredients: TIngredientWithId[]
+}
+
+export const initialState: TState = {
   bun: null,
   ingredients: []
 }
@@ -51,7 +51,7 @@ export const {
   eraseIngredients
 } = burgerConstructorSlice.actions;
 
-export default burgerConstructorSlice.reducer;
+export const constructorReducer = burgerConstructorSlice.reducer;
 
 export const selectConstructorIngredients = (state: RootStore) => state.burgerConstructor.ingredients;
 export const selectConstructorBun = (state: RootStore) => state.burgerConstructor.bun;
