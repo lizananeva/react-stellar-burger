@@ -11,7 +11,7 @@ type TState = {
   wsError: string | null
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   orders: null,
   wsOpen: false,
   wsConnect: true,
@@ -72,7 +72,7 @@ export const {
   setWebsocketError
 } = feedSlice.actions;
 
-export default feedSlice.reducer;
+export const feedReducer = feedSlice.reducer;
 
 export const selectOrders = (state: RootStore) => state.feed.orders;
 export const selectTotal = (state: RootStore) => state.feed.orders?.total;

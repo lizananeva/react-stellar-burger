@@ -10,7 +10,7 @@ type TState = {
   error: string | unknown
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   user: null,
   isAuthChecked: false,
   isEmailChecked: false,
@@ -82,7 +82,7 @@ const authSlice = createSlice({
 
 export const { setUser, setAuthChecked, setEmailChecked } = authSlice.actions;
 
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;
 
 export const selectUser = (state: RootStore) => state.auth.user;
 export const selectIsAuthChecked = (state: RootStore) => state.auth.isAuthChecked;
