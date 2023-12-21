@@ -1,6 +1,6 @@
 # Каноническая работа проекта Stellar Burger
 
-[Ссылка на проект](https://lizananeva.github.io/react-stellar-burger/index.html "Проект: Stellar Burger")
+[Ссылка на проект](http://stellarburger.lizananeva.nomoredomainsmonster.ru "Проект: Stellar Burger")
 
 ### Обзор
 * Интро
