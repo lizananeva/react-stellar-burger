@@ -9,7 +9,7 @@ type TState = {
   error: {} | null
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   ingredients: [],
   isLoading: false,
   error: null
@@ -43,7 +43,7 @@ const ingredientsSlice = createSlice({
   }
 });
 
-export default ingredientsSlice.reducer;
+export const ingredientsReducer = ingredientsSlice.reducer;
 
 export const selectIngredients = (state: RootStore) => state.ingredients.ingredients;
 export const selectIsIngredientsLoading = (state: RootStore) => state.ingredients.isLoading;

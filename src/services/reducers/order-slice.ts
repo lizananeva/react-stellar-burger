@@ -8,7 +8,7 @@ type TState = {
   isLoading: boolean
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   order: { ingredients: null, number: null },
   isModalOpen: false,
   isLoading: false
@@ -43,7 +43,7 @@ const orderSlice = createSlice({
 
 export const { hideOrder } = orderSlice.actions;
 
-export default orderSlice.reducer;
+export const orderReducer = orderSlice.reducer;
 
 export const selectOrderNumber = (state: RootStore) => state.order.order.number;
 export const selectIsOrderModalOpen = (state: RootStore) => state.order.isModalOpen;

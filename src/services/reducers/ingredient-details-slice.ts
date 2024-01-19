@@ -7,7 +7,7 @@ type TState = {
   isModalOpen: boolean,
 }
 
-const initialState: TState = {
+export const initialState: TState = {
   ingredient: null,
   isModalOpen: false
 }
@@ -29,7 +29,7 @@ const ingredientDetailsSlice = createSlice({
 
 export const { showDetails, hideDetails } = ingredientDetailsSlice.actions;
 
-export default ingredientDetailsSlice.reducer;
+export const ingredientDetailsReducer = ingredientDetailsSlice.reducer;
 
 export const selectIngredientDetails = (state: RootStore) => state.ingredientDetails.ingredient;
 export const selectIsIngredientModalOpen = (state: RootStore) => state.ingredientDetails.isModalOpen;
